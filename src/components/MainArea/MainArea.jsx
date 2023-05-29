@@ -1,6 +1,4 @@
-import PostsContainer from "../../containers/Posts/Posts";
-
-export default function MainArea() {
+export default function MainArea({ children }) {
   return (
     <main
       id="content"
@@ -8,7 +6,7 @@ export default function MainArea() {
       role="main"
       tabIndex="-1"
     >
-      <PostsContainer />
+      {children}
     </main>
   );
 }

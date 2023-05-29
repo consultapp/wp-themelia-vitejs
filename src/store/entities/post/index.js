@@ -8,6 +8,7 @@ export const postSlice = createSlice({
   name: "post",
   initialState: postEntityAdapter.getInitialState({
     loadingStatus: LOADING_STATUS.idle,
+    loadedPages: [],
   }),
   extraReducers: {
     [fetchPost.pending]: (state) => {
@@ -15,6 +16,15 @@ export const postSlice = createSlice({
     },
     [fetchPost.fulfilled]: (state, { payload }) => {
       state.loadingStatus = LOADING_STATUS.fulfilled;
+      console.log("payload", payload[0].pageIndex, payload);
+      if (
+        payload &&
+        payload.length &&
+        payload[0].pageIndex &&
+        !state.loadedPages.includes(payload[0].pageIndex)
+      )
+        state.loadedPages.push(payload[0].pageIndex);
+
       postEntityAdapter.setMany(state, payload);
     },
     [fetchPost.rejected]: (state, { payload }) => {

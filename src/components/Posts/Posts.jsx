@@ -1,6 +1,17 @@
 import Loading from "../Loading/Loading";
+import PostShortContainer from "../../containers/PostShort/PostShort";
 
-export default function Posts({ isLoading }) {
+export default function Posts({ isLoading, postIds }) {
   if (isLoading) return <Loading />;
-  return <div>Posts</div>;
+  if (!postIds || postIds.length) {
+    <div>Posts not found</div>;
+  }
+
+  return (
+    <>
+      {postIds.map((id) => {
+        return <PostShortContainer postId={id} key={id} />;
+      })}
+    </>
+  );
 }

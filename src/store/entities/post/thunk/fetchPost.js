@@ -1,33 +1,47 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { LOADING_STATUS } from "../../../../constants";
+import { selectIfPostIdInIds, selectIsPostPageLoaded } from "../selectors";
 
 export const fetchPost = createAsyncThunk(
   "post/fetchPostById",
   async (
-    { postId, pageIndex, loadFull = false },
+    { postId, pageIndex = 1, loadFull = false },
     { getState, rejectWithValue }
   ) => {
-    // const state = getState();
-    // const restaurantMenu = selectMenuByRestaurantId(state, {
-    //   restaurantId,
-    // });
-    // const dishIds = selectDishIds(state);
-    // if (
-    //   restaurantMenu &&
-    //   restaurantMenu.every((dishId) => dishIds.includes(dishId))
-    // ) {
-    //   return rejectWithValue(LOADING_STATUS.earlyAdded);
-    // }
+    const state = getState();
+    const isPostPageLoaded = selectIsPostPageLoaded(state, {
+      pageIndex,
+    });
+
+    const isPostAlreadyLoaded = selectIfPostIdInIds(state, { postId });
+    console.log("isPostAlreadyLoaded", isPostAlreadyLoaded);
+
+    if (isPostAlreadyLoaded) {
+      return rejectWithValue(LOADING_STATUS.earlyAdded);
+    }
+
+    if (!postId && isPostPageLoaded) {
+      return rejectWithValue(LOADING_STATUS.earlyAdded);
+    }
 
     const url = new URL("posts", import.meta.env.VITE_API_BASE_URL);
 
-    const fields = `id,categories,excerpt,date,_links,type,slug,modified${
+    const fields = `id,title,categories,excerpt,date,link,type,slug,modified${
       loadFull ? "content" : ""
     }`;
     url.searchParams.set("_fields", fields);
-    if (pageIndex) url.searchParams.set("page", pageIndex);
+
+    if (!postId && pageIndex) url.searchParams.set("page", pageIndex);
+    if (postId) url.searchParams.set("include", postId);
+
+    url.searchParams.set("per_page", import.meta.env.VITE_POSTS_PER_PAGE);
 
     const response = await fetch(url);
-    return await response.json();
+    const json = await response.json();
+
+    return json.map((item) => {
+      return { ...item, pageIndex };
+    });
   }
 );
 
