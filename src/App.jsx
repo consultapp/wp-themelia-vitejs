@@ -12,6 +12,7 @@ function App() {
         <MainLayout>
           <Routes>
             <Route index element={<PostsContainer />} />
+            <Route path="/page/:pageIndex/" element={<PostsContainer />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </MainLayout>

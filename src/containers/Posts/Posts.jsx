@@ -7,9 +7,11 @@ import {
   selectIsPostPageLoaded,
   selectPostsIdsByPageIndex,
 } from "../../store/entities/post/selectors";
+import { useParams } from "react-router-dom";
 
 export default function PostsContainer() {
-  const pageIndex = 1;
+  const { pageIndex = 1 } = useParams();
+
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsPostLoading);
   const isPostPageLoaded = useSelector((state) =>

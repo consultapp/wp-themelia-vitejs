@@ -21,9 +21,9 @@ export const postSlice = createSlice({
         payload &&
         payload.length &&
         payload[0].pageIndex &&
-        !state.loadedPages.includes(payload[0].pageIndex)
+        !state.loadedPages.includes(Number(payload[0].pageIndex))
       )
-        state.loadedPages.push(payload[0].pageIndex);
+        state.loadedPages.push(Number(payload[0].pageIndex));
 
       postEntityAdapter.setMany(state, payload);
     },

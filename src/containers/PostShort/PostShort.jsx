@@ -18,9 +18,9 @@ export default function PostShortContainer({ postId }) {
   const isLoading = useSelector(selectIsPostLoading);
   const post = useSelector((state) => selectPostById(state, { postId }));
 
-  useEffect(() => {
-    if (!isPostAlredyLoaded) dispatch(fetchPost({ postId }));
-  }, [dispatch, postId, isPostAlredyLoaded]);
+  // useEffect(() => {
+  //   if (!isPostAlredyLoaded) dispatch(fetchPost({ postId }));
+  // }, [dispatch, postId, isPostAlredyLoaded]);
 
   const render = useMemo(
     () => <PostShort isLoading={isLoading} post={post} key={postId} />,

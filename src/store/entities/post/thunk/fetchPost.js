@@ -40,7 +40,7 @@ export const fetchPost = createAsyncThunk(
     const json = await response.json();
 
     return json.map((item) => {
-      return { ...item, pageIndex };
+      return { ...item, pageIndex: Number(pageIndex) };
     });
   }
 );
