@@ -1,3 +1,5 @@
+import About from "../Plugins/About";
+
 export default function Sidebar() {
   return (
     <aside
@@ -12,8 +14,10 @@ export default function Sidebar() {
         id="sidebar-primary-title"
         className="screen-reader-text font-headlines"
       >
-        Sidebar
+        Primary Sidebar
       </h3>
+      <About />
+
       <div className="sidebar-inner"></div>
     </aside>
   );
