@@ -1,3 +1,4 @@
+import SearchContainer from "../../containers/Search/Search";
 import About from "../Plugins/About";
 
 export default function Sidebar() {
@@ -14,8 +15,9 @@ export default function Sidebar() {
         id="sidebar-primary-title"
         className="screen-reader-text font-headlines"
       >
-        Primary Sidebar
+        Sidebar
       </h3>
+      <SearchContainer />
       <About />
 
       <div className="sidebar-inner"></div>

@@ -14,7 +14,6 @@ export const fetchPost = createAsyncThunk(
     });
 
     const isPostAlreadyLoaded = selectIfPostIdInIds(state, { postId });
-    console.log("isPostAlreadyLoaded", isPostAlreadyLoaded);
 
     if (isPostAlreadyLoaded) {
       return rejectWithValue(LOADING_STATUS.earlyAdded);

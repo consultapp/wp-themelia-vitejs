@@ -24,7 +24,7 @@ export default function PostsContainer() {
 
   useEffect(() => {
     if (!isPostPageLoaded) dispatch(fetchPost({ pageIndex }));
-  }, [dispatch, isPostPageLoaded, pageIndex]);
+  }, [dispatch, pageIndex]);
 
   return <Posts isLoading={isLoading} postIds={postIds} />;
 }
