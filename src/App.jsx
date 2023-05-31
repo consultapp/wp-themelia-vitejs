@@ -5,6 +5,7 @@ import MainLayout from "./layout/MainLayout";
 import PostsContainer from "./containers/Posts/Posts";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import { store } from "./store/index";
+import PostContainer from "./containers/Post/Post";
 function App() {
   return (
     <Provider store={store}>
@@ -12,7 +13,11 @@ function App() {
         <MainLayout>
           <Routes>
             <Route index element={<PostsContainer />} />
-            <Route path="/page/:pageIndex/" element={<PostsContainer />} />
+            <Route path="/posts/:pageIndex/" element={<PostsContainer />} />
+            <Route
+              path="/post/:postId/"
+              element={<PostContainer loadFull={true} />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </MainLayout>

@@ -5,7 +5,7 @@ export default function Pagination() {
     <div>
       <Link to="/">1</Link>
       &nbsp;
-      <Link to="/page/2/">2</Link>
+      <Link to="/posts/2/">2</Link>
     </div>
   );
 }

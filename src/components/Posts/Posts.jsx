@@ -1,6 +1,6 @@
 import Loading from "../Loading/Loading";
-import PostShortContainer from "../../containers/PostShort/PostShort";
 import Pagination from "../Pagination/Pagination";
+import PostContainer from "../../containers/Post/Post";
 
 export default function Posts({ isLoading, postIds }) {
   if (isLoading) return <Loading />;
@@ -11,7 +11,7 @@ export default function Posts({ isLoading, postIds }) {
   return (
     <>
       {postIds.map((id) => {
-        return <PostShortContainer postId={id} key={id} />;
+        return <PostContainer postId={id} key={id} />;
       })}
       <Pagination />
     </>

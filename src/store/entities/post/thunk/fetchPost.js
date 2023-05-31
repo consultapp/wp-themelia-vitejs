@@ -5,7 +5,7 @@ import { selectIfPostIdInIds, selectIsPostPageLoaded } from "../selectors";
 export const fetchPost = createAsyncThunk(
   "post/fetchPostById",
   async (
-    { postId, pageIndex = 1, loadFull = false },
+    { postId, pageIndex, loadFull = false },
     { getState, rejectWithValue }
   ) => {
     const state = getState();
@@ -26,14 +26,15 @@ export const fetchPost = createAsyncThunk(
     const url = new URL("posts", import.meta.env.VITE_API_BASE_URL);
 
     const fields = `id,title,categories,excerpt,date,link,type,slug,modified${
-      loadFull ? "content" : ""
+      loadFull ? ",content" : ""
     }`;
     url.searchParams.set("_fields", fields);
 
-    if (!postId && pageIndex) url.searchParams.set("page", pageIndex);
+    if (!postId && pageIndex) {
+      url.searchParams.set("page", pageIndex);
+      url.searchParams.set("per_page", import.meta.env.VITE_POSTS_PER_PAGE);
+    }
     if (postId) url.searchParams.set("include", postId);
-
-    url.searchParams.set("per_page", import.meta.env.VITE_POSTS_PER_PAGE);
 
     const response = await fetch(url);
     const json = await response.json();

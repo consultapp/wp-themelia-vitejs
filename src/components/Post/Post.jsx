@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 
-export default function PostShort({ isLoading, post }) {
+export default function Post({ isLoading, post }) {
   if (isLoading) return <Loading />;
-  if (!post) return <div>Error???</div>;
+  if (!post) return <div>Post Error???</div>;
 
   const { id, excerpt, slug, title } = post;
 
