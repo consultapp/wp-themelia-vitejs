@@ -1,0 +1,12 @@
+.search {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+
+  width: 100%;
+}
+
+.searchLi {
+  margin: 5px;
+}

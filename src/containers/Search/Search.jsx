@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Search from "../../components/Plugins/Search";
+import { LOADING_STATUS } from "../../constants";
+
+const initialState = { loadingStatus: LOADING_STATUS.idle, data: [] };
 
 async function searchByText(text) {
   // https://consultapp.ru/wp-json/wp/v2/search?per_page=10&search=1c
@@ -17,7 +20,7 @@ async function searchByText(text) {
 
 export default function SearchContainer() {
   const [search, setSearch] = useState("");
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState(initialState);
 
   const timer = useRef();
 
@@ -27,17 +30,27 @@ export default function SearchContainer() {
   });
 
   useEffect(() => {
-    if (search.length > 1) {
+    if (search.length < 1) {
       if (timer) clearTimeout(timer.current);
-      setResult([]);
-      timer.current = setTimeout(() => {
-        searchByText(search).then((data) => {
-          setResult(data);
-        });
-      }, 300);
-    } else {
-      setResult([]);
+      setResult(initialState);
+      return;
     }
+
+    if (timer) clearTimeout(timer.current);
+    setResult({ ...initialState, loadingStatus: LOADING_STATUS.pending });
+
+    timer.current = setTimeout(() => {
+      searchByText(search)
+        .then((data) => {
+          setResult({ data, loadingStatus: LOADING_STATUS.fulfilled });
+        })
+        .catch(() => {
+          setResult({
+            ...initialState,
+            loadingStatus: LOADING_STATUS.rejected,
+          });
+        });
+    }, 300);
   }, [search]);
 
   return (
