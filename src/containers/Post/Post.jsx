@@ -7,7 +7,7 @@ import {
 } from "../../store/entities/post/selectors";
 import Post from "../../components/Post/Post";
 
-export default function PostContainer({ postId, loadFull = false }) {
+export default function PostContainer({ postId, showShort = false }) {
   // const dispatch = useDispatch();
 
   const isLoading = useSelector(selectIsPostLoading);
@@ -18,14 +18,14 @@ export default function PostContainer({ postId, loadFull = false }) {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [dispatch, post]);
 
-  return loadFull ? (
+  return showShort ? (
+    <PostShort isLoading={!post || isLoading} post={post} key={postId} />
+  ) : (
     <Post
       isLoading={!post || isLoading}
       post={post}
       key={postId}
-      loadingStatus={loadingStatus}
+      // loadingStatus={loadingStatus}
     />
-  ) : (
-    <PostShort isLoading={!post || isLoading} post={post} key={postId} />
   );
 }

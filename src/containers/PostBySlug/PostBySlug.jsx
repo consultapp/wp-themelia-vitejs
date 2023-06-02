@@ -11,11 +11,12 @@ import { fetchPost } from "../../store/entities/post/thunk/fetchPost";
 
 export default function PostBySlugContainer() {
   const dispatch = useDispatch();
-  const { slug } = useParams();
-
+  const params = useParams();
+  const { slug } = params;
   const isLoading = useSelector(selectIsPostLoading);
   const loadingStatus = useSelector(selectPostLoadingStatus);
 
+  console.log("slug", slug);
   const post = useSelector((state) => selectPostBySlug(state, { slug }));
 
   useEffect(() => {

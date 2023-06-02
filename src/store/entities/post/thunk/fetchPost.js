@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LOADING_STATUS } from "../../../../constants";
-import { selectIfPostIdInIds, selectIsPostPageLoaded } from "../selectors";
+import {
+  selectIfPostAlreadyLoaded,
+  selectIsPostPageLoaded,
+} from "../selectors";
 
 export const fetchPost = createAsyncThunk(
   "post/fetchPost",
@@ -13,7 +16,7 @@ export const fetchPost = createAsyncThunk(
       pageIndex,
     });
 
-    const isPostAlreadyLoaded = selectIfPostIdInIds(state, { postId });
+    const isPostAlreadyLoaded = selectIfPostAlreadyLoaded(state, { postId });
 
     if (isPostAlreadyLoaded) {
       return rejectWithValue(LOADING_STATUS.earlyAdded);

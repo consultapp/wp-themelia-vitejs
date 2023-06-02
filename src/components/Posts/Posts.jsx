@@ -11,7 +11,7 @@ export default function Posts({ isLoading, postIds }) {
   return (
     <>
       {postIds.map((id) => {
-        return <PostContainer postId={id} key={id} />;
+        return <PostContainer postId={id} key={id} showShort={true} />;
       })}
       <Pagination />
     </>

@@ -9,6 +9,7 @@ export const postSlice = createSlice({
   initialState: postEntityAdapter.getInitialState({
     loadingStatus: LOADING_STATUS.idle,
     loadedPages: [],
+    slugToId: {},
   }),
   extraReducers: {
     [fetchPost.pending]: (state) => {
@@ -16,6 +17,9 @@ export const postSlice = createSlice({
     },
     [fetchPost.fulfilled]: (state, { payload }) => {
       state.loadingStatus = LOADING_STATUS.fulfilled;
+      payload.forEach((item) => {
+        if (item.slug) state.slugToId[item.slug] = item.id;
+      });
       if (
         payload?.length &&
         payload[0].pageIndex &&
