@@ -3,9 +3,9 @@ import { LOADING_STATUS } from "../../../../constants";
 import { selectIfPostIdInIds, selectIsPostPageLoaded } from "../selectors";
 
 export const fetchPost = createAsyncThunk(
-  "post/fetchPostById",
+  "post/fetchPost",
   async (
-    { postId, pageIndex, loadFull = false },
+    { postId, slug, pageIndex, loadFull = true },
     { getState, rejectWithValue }
   ) => {
     const state = getState();
@@ -30,18 +30,21 @@ export const fetchPost = createAsyncThunk(
     }`;
     url.searchParams.set("_fields", fields);
 
-    if (!postId && pageIndex) {
+    if (!postId && !slug && pageIndex) {
       url.searchParams.set("page", pageIndex);
       url.searchParams.set("per_page", import.meta.env.VITE_POSTS_PER_PAGE);
     }
     if (postId) url.searchParams.set("include", postId);
+    if (slug) url.searchParams.set("slug", slug);
 
     const response = await fetch(url);
     const json = await response.json();
 
-    return json.map((item) => {
-      return { ...item, pageIndex: Number(pageIndex) };
-    });
+    return pageIndex
+      ? json.map((item) => {
+          return { ...item, pageIndex: Number(pageIndex) };
+        })
+      : json;
   }
 );
 

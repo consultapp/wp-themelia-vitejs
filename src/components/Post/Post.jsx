@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import { LOADING_STATUS } from "../../constants";
 
-export default function Post({ isLoading, post }) {
+export default function Post({ isLoading, post, loadingStatus }) {
+  if (loadingStatus === LOADING_STATUS.rejected)
+    return <div>Post Error???</div>;
   if (isLoading) return <Loading />;
   if (!post) return <div>Post Error???</div>;
 
-  const { id, excerpt, slug, title } = post;
+  const { id, content, slug, title } = post;
 
   const postTitle = title?.rendered || "";
-  const postExcerpt = excerpt.rendered;
+  const postContent = content?.rendered;
+
+  console.log("loadingStatus", loadingStatus);
 
   return (
     <div
@@ -20,14 +25,14 @@ export default function Post({ isLoading, post }) {
     >
       <header className="entry-header">
         <h2 className="entry-title font-headlines" itemProp="headline">
-          <Link to={`/${slug}`} rel="bookmark" itemProp="url">
+          <Link to={`/post/${slug}`} rel="bookmark" itemProp="url">
             {postTitle}
           </Link>
         </h2>
       </header>
       <div className="entry-summary" itemProp="description">
-        <p dangerouslySetInnerHTML={{ __html: postExcerpt }}></p>
-        <Link to={`/${slug}`} className="entry-more-link">
+        <p dangerouslySetInnerHTML={{ __html: postContent }}></p>
+        <Link to={`/post/${slug}`} className="entry-more-link">
           <span>Читать далее</span>
           <span className="screen-reader-text">{postTitle}</span>
         </Link>

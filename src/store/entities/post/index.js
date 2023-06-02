@@ -16,10 +16,8 @@ export const postSlice = createSlice({
     },
     [fetchPost.fulfilled]: (state, { payload }) => {
       state.loadingStatus = LOADING_STATUS.fulfilled;
-
       if (
-        payload &&
-        payload.length &&
+        payload?.length &&
         payload[0].pageIndex &&
         !state.loadedPages.includes(Number(payload[0].pageIndex))
       )

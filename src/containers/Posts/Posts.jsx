@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPost } from "../../store/entities/post/thunk/fetchPost";
 import Posts from "../../components/Posts/Posts";
 import {
   selectIsPostLoading,
@@ -8,6 +7,7 @@ import {
   selectPostsIdsByPageIndex,
 } from "../../store/entities/post/selectors";
 import { useParams } from "react-router-dom";
+import { fetchPost } from "../../store/entities/post/thunk/fetchPost";
 
 export default function PostsContainer() {
   const { pageIndex = 1 } = useParams();
@@ -24,7 +24,9 @@ export default function PostsContainer() {
 
   useEffect(() => {
     if (!isPostPageLoaded) dispatch(fetchPost({ pageIndex }));
-  }, [dispatch, isPostPageLoaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isPostPageLoaded, pageIndex]);
+  console.log("postIds", postIds);
 
-  return <Posts isLoading={isLoading} postIds={postIds} />;
+  return <Posts isLoading={isLoading} postIds={postIds || []} />;
 }

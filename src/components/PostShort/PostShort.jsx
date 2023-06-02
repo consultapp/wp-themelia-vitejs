@@ -20,14 +20,14 @@ export default function PostShort({ isLoading, post }) {
     >
       <header className="entry-header">
         <h2 className="entry-title font-headlines" itemProp="headline">
-          <Link to={`/${slug}`} rel="bookmark" itemProp="url">
+          <Link to={`/post/${slug}`} rel="bookmark" itemProp="url">
             {postTitle}
           </Link>
         </h2>
       </header>
       <div className="entry-summary" itemProp="description">
         <p dangerouslySetInnerHTML={{ __html: postExcerpt }}></p>
-        <Link to={`/${slug}`} className="entry-more-link">
+        <Link to={`/post/${slug}`} className="entry-more-link">
           <span>Читать далее</span>
           <span className="screen-reader-text">{postTitle}</span>
         </Link>

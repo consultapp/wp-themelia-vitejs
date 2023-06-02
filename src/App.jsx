@@ -1,11 +1,13 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { store } from "./store/index";
 import MainLayout from "./layout/MainLayout";
 import PostsContainer from "./containers/Posts/Posts";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
-import { store } from "./store/index";
-import PostContainer from "./containers/Post/Post";
+import PostBySlugContainer from "./containers/PostBySlug/PostBySlug";
+import PageContainer from "./containers/Page/Page";
+
 function App() {
   return (
     <Provider store={store}>
@@ -13,10 +15,11 @@ function App() {
         <MainLayout>
           <Routes>
             <Route index element={<PostsContainer />} />
-            <Route path="/posts/:pageIndex/" element={<PostsContainer />} />
+            <Route path="/page/:slug" element={<PageContainer />} />
+            <Route path="/posts/:pageIndex" element={<PostsContainer />} />
             <Route
-              path="/post/:postId/"
-              element={<PostContainer loadFull={true} />}
+              path="/post/:slug"
+              element={<PostBySlugContainer loadFull={true} />}
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
@@ -27,22 +30,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <Route path="restaurants" element={<RestaurantsPage />} />
-<Route
-  path="restaurants/:restaurantId"
-  element={<RestaurantPage />}
-/>
-<Route
-  path="restaurants/:restaurantId/menu"
-  element={<RestaurantMenuPage />}
-/>
-<Route
-  path="restaurants/:restaurantId/reviews"
-  element={<RestaurantReviewsPage />}
-/>
-<Route path="contacts/about-us" element={<AboutUsPage />} />
-<Route path="contacts/addresses" element={<AddressesPage />} />
-<Route path="cart" element={<CartPage />} /> */
-}

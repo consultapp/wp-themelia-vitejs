@@ -4,7 +4,7 @@ import PostContainer from "../../containers/Post/Post";
 
 export default function Posts({ isLoading, postIds }) {
   if (isLoading) return <Loading />;
-  if (!postIds || postIds.length) {
+  if (!postIds.length) {
     <div>Posts not found</div>;
   }
 

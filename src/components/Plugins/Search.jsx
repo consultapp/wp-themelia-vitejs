@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LOADING_STATUS } from "../../constants";
 import Loading from "../Loading/Loading";
 import styles from "./style.module.css";
@@ -22,14 +23,14 @@ export default function Search({ result, search, handleSearchChange }) {
             {data.map((item) => {
               return (
                 <li key={item.id} className={styles.searchLi}>
-                  <a
-                    href={
+                  <Link
+                    to={
                       item.type +
                       item.url.replace(import.meta.env.VITE_SITE_BASE_URL, "")
                     }
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

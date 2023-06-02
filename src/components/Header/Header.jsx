@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./style.module.scss";
 
 export default function Header() {
@@ -12,10 +13,7 @@ export default function Header() {
       <div id="branding" className="site-branding grid-container">
         <div id="access" className="site-access grid-100">
           <div id="access-inner" className="access-inner relative">
-            <a
-              href="https://consultapp.ru/"
-              className="site-title-wrap clearfix"
-            >
+            <Link to="/" className="site-title-wrap clearfix">
               <div className="branding-item-wrap flex-center">
                 <div className="titles-wrap branding-item">
                   <h1
@@ -35,7 +33,7 @@ export default function Header() {
                   </p>
                 </div>
               </div>
-            </a>
+            </Link>
             <nav
               className="menu menu-primary font-secondary"
               role="navigation"

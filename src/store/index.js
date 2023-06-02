@@ -3,9 +3,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { postSlice } from "./entities/post";
 import { logger } from "./middlewares/logger";
+import { pageSlice } from "./entities/page";
 
 const rootReducer = combineReducers({
   post: postSlice.reducer,
+  page: pageSlice.reducer,
 });
 
 export const store = configureStore({

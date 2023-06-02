@@ -5,6 +5,11 @@ export const selectPostModule = (state) => state.post;
 export const selectPostById = (state, { postId }) =>
   selectPostModule(state).entities[postId];
 
+export const selectPostBySlug = (state, { slug }) =>
+  Object.values(selectPostModule(state).entities || {}).filter(
+    (item) => item?.slug === slug || item?.searchSlug === slug
+  )?.[0];
+
 export const selectPostIds = (state) => selectPostModule(state).ids;
 
 export const selectIfPostIdInIds = (state, { postId }) =>
