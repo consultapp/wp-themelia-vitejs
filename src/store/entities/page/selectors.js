@@ -1,6 +1,6 @@
 import { LOADING_STATUS } from "../../../constants";
 
-export const selectPageModule = (state) => state.post;
+export const selectPageModule = (state) => state.page;
 
 export const selectPageSlugToId = (state) => selectPageModule(state).slugToId;
 

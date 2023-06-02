@@ -12,10 +12,8 @@ export default function PageContainer() {
   const { slug } = useParams();
   const dispatch = useDispatch();
 
-  const page = useSelector((state) => selectPageBySlug(state, slug));
+  const page = useSelector((state) => selectPageBySlug(state, { slug }));
   const isLoading = useSelector(selectIsPageLoading);
-
-  console.log("page, isLoading", page, isLoading);
 
   useEffect(() => {
     dispatch(fetchPage(slug));
