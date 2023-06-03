@@ -3,6 +3,8 @@ import FooterContainer from "../containers/Footer/Footer";
 import Workarea from "../components/Workarea/Workarea";
 
 export default function Layout({ children }) {
+  console.log("Layout");
+
   return (
     <>
       <HeaderContainer />

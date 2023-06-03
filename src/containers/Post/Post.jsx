@@ -2,35 +2,33 @@ import PostShort from "../../components/PostShort/PostShort";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsPostLoading,
+  selectIsPostNotFound,
   selectPostById,
   selectPostBySlug,
-  selectPostLoadingStatus,
 } from "../../store/entities/post/selectors";
 import Post from "../../components/Post/Post";
 import { useEffect } from "react";
 import { fetchPost } from "../../store/entities/post/thunk/fetchPost";
-import { LOADING_STATUS } from "../../constants";
-import NotFoundPage from "../../components/NotFoundPage/NotFoundPage";
 import { useParams } from "react-router-dom";
+import NotFoundPage from "../../components/NotFoundPage/NotFoundPage";
 
 export default function PostContainer({ postId, showShort = false }) {
   const dispatch = useDispatch();
   const params = useParams();
   const { slug } = params;
+
   const isLoading = useSelector(selectIsPostLoading);
-  const loadingStatus = useSelector(selectPostLoadingStatus);
+  const isNotFound = useSelector(selectIsPostNotFound);
 
   const postById = useSelector((state) => selectPostById(state, { postId }));
   const postBySlug = useSelector((state) => selectPostBySlug(state, { slug }));
-
   const post = postById ? postById : postBySlug;
 
   useEffect(() => {
-    if (!post) dispatch(fetchPost({ postId, slug }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, post]);
+    dispatch(fetchPost({ postId, slug }));
+  }, [dispatch, postId, slug]);
 
-  if (loadingStatus === LOADING_STATUS.rejected) return <NotFoundPage />;
+  if (isNotFound) return <NotFoundPage />;
 
   return showShort ? (
     <PostShort isLoading={!post || isLoading} post={post} key={postId} />

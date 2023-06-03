@@ -44,7 +44,7 @@ export const fetchPost = createAsyncThunk(
     const data = await response.json();
 
     if (!data || !data.length) {
-      return rejectWithValue(LOADING_STATUS.rejected);
+      return rejectWithValue(LOADING_STATUS.notfound);
     }
 
     return pageIndex

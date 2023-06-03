@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPage } from "../../store/entities/page/thunk/fetchPage";
-import { useParams } from "react-router-dom";
+import { redirect, useParams } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import {
   selectIsPageLoading,
+  selectIsPageNotFound,
   selectPageBySlug,
-  selectPageLoadingStatus,
 } from "../../store/entities/page/selectors";
-import { LOADING_STATUS } from "../../constants";
-import NotFoundPage from "../../components/NotFoundPage/NotFoundPage";
 
 export default function PageContainer() {
   const { slug } = useParams();
@@ -17,14 +15,14 @@ export default function PageContainer() {
 
   const page = useSelector((state) => selectPageBySlug(state, { slug }));
   const isLoading = useSelector(selectIsPageLoading);
-  const loadingStatus = useSelector(selectPageLoadingStatus);
+  const isNotFound = useSelector(selectIsPageNotFound);
 
   useEffect(() => {
     if (!page) dispatch(fetchPage(slug));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, page]);
 
-  if (loadingStatus === LOADING_STATUS.rejected) return <NotFoundPage />;
+  // if (isNotFound) return redirect("/404");
 
   return <Page page={page} isLoading={isLoading} />;
 }

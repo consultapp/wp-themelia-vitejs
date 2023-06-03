@@ -75,18 +75,24 @@ export default function Header() {
                   </Link>
                 </li>
                 <li
+                  id="menu-item-1106"
+                  className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1106"
+                >
+                  <Link to="/post/simple-bot-for-ssstelegram-php/">
+                    Telegram Bots 404
+                  </Link>
+                </li>
+                {/* <li
                   id="menu-item-1105"
                   className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1105"
                 >
-                  <Link to="/category/stati/wordpress/%d0%bf%d0%bb%d0%b0%d0%b3%d0%b8%d0%bd%d1%8b-wp/">
-                    WordPress
-                  </Link>
-                </li>
+                  <Link to="/post/плагины-wp/">WordPress</Link>
+                </li> */}
                 <li
                   id="menu-item-657"
                   className="menu-item menu-item-type-post_type menu-item-object-post menu-item-657"
                 >
-                  <Link to="/page/%d1%85%d0%be%d1%81%d1%82%d0%b8%d0%bd%d0%b3/">
+                  <Link to="/post/%d1%85%d0%be%d1%81%d1%82%d0%b8%d0%bd%d0%b3/">
                     Хостинг
                   </Link>
                 </li>

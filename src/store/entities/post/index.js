@@ -8,15 +8,18 @@ export const postSlice = createSlice({
   name: "post",
   initialState: postEntityAdapter.getInitialState({
     loadingStatus: LOADING_STATUS.idle,
+    status404: false,
     loadedPages: [],
     slugToId: {},
   }),
   extraReducers: {
     [fetchPost.pending]: (state) => {
       state.loadingStatus = LOADING_STATUS.pending;
+      state.status404 = false;
     },
     [fetchPost.fulfilled]: (state, { payload }) => {
       state.loadingStatus = LOADING_STATUS.fulfilled;
+      state.status404 = false;
       payload.forEach((item) => {
         if (item.slug) state.slugToId[item.slug] = item.id;
       });
@@ -30,10 +33,16 @@ export const postSlice = createSlice({
       postEntityAdapter.setMany(state, payload);
     },
     [fetchPost.rejected]: (state, { payload }) => {
-      state.loadingStatus =
-        payload === LOADING_STATUS.earlyAdded
-          ? LOADING_STATUS.fulfilled
-          : LOADING_STATUS.rejected;
+      if (payload === LOADING_STATUS.notfound) {
+        state.status404 = true;
+        state.loadingStatus = LOADING_STATUS.rejected;
+      } else {
+        state.status404 = false;
+        state.loadingStatus =
+          payload === LOADING_STATUS.earlyAdded
+            ? LOADING_STATUS.fulfilled
+            : LOADING_STATUS.rejected;
+      }
     },
   },
 });

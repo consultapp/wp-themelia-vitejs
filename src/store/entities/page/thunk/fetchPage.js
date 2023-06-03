@@ -21,7 +21,7 @@ export const fetchPage = createAsyncThunk(
     const response = await fetch(url);
     const data = await response.json();
     if (!data || !data.length) {
-      return rejectWithValue(LOADING_STATUS.rejected);
+      return rejectWithValue(LOADING_STATUS.notfound);
     }
 
     return data;

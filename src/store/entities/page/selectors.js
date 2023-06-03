@@ -16,8 +16,10 @@ export const selectPageBySlug = (state, { slug }) =>
 export const selectIsPageLoaded = (state, { slug }) =>
   Boolean(selectPageSlugToId(state)[encodeURI(slug).toLowerCase()]);
 
-// Loading Status
+//  Status
 export const selectPageLoadingStatus = (state) =>
   selectPageModule(state).loadingStatus;
 export const selectIsPageLoading = (state) =>
   selectPageLoadingStatus(state) === LOADING_STATUS.pending;
+export const selectIsPageNotFound = (state) =>
+  selectPageLoadingStatus(state) === LOADING_STATUS.notfound;

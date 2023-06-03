@@ -17,11 +17,18 @@ export const selectPostBySlug = (state, { slug }) =>
     postId: selectPostSlugToId(state)[encodeURI(slug).toLowerCase()],
   });
 
-// Loading
+// Status
 export const selectPostLoadingStatus = (state) =>
   selectPostModule(state).loadingStatus;
 export const selectIsPostLoading = (state) =>
   selectPostLoadingStatus(state) === LOADING_STATUS.pending;
+
+export const selectIsPostStatus404 = (state) =>
+  selectPostModule(state).status404;
+
+export const selectIsPostNotFound = (state) =>
+  selectPostLoadingStatus(state) === LOADING_STATUS.rejected &&
+  selectIsPostStatus404(state);
 
 // pageIndex + Page
 export const selectPostsByPageIndex = (state, { pageIndex = 1 }) =>
