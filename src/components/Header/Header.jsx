@@ -64,23 +64,21 @@ export default function Header() {
                   id="menu-item-1530"
                   className="menu-item menu-item-type-post_type menu-item-object-page menu-item-1530"
                 >
-                  <a href="https://consultapp.ru/projects-react-next/">
-                    React/Next
-                  </a>
+                  <a href="/page/projects-react-next/">React/Next</a>
                 </li>
                 <li
                   id="menu-item-1106"
                   className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1106"
                 >
-                  <a href="https://consultapp.ru/category/stati/telegram/telegram-bots/">
+                  <Link to="/post/simple-bot-for-telegram-php/">
                     Telegram Bots
-                  </a>
+                  </Link>
                 </li>
                 <li
                   id="menu-item-1105"
                   className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1105"
                 >
-                  <a href="https://consultapp.ru/category/stati/wordpress/%d0%bf%d0%bb%d0%b0%d0%b3%d0%b8%d0%bd%d1%8b-wp/">
+                  <a href="/category/stati/wordpress/%d0%bf%d0%bb%d0%b0%d0%b3%d0%b8%d0%bd%d1%8b-wp/">
                     WordPress
                   </a>
                 </li>
@@ -88,7 +86,7 @@ export default function Header() {
                   id="menu-item-657"
                   className="menu-item menu-item-type-post_type menu-item-object-post menu-item-657"
                 >
-                  <a href="https://consultapp.ru/%d1%85%d0%be%d1%81%d1%82%d0%b8%d0%bd%d0%b3/">
+                  <a href="/page/%d1%85%d0%be%d1%81%d1%82%d0%b8%d0%bd%d0%b3/">
                     Хостинг
                   </a>
                 </li>
