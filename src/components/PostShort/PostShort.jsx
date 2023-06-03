@@ -20,9 +20,12 @@ export default function PostShort({ isLoading, post }) {
     >
       <header className="entry-header">
         <h2 className="entry-title font-headlines" itemProp="headline">
-          <Link to={`/post/${slug}`} rel="bookmark" itemProp="url">
-            {postTitle}
-          </Link>
+          <Link
+            to={`/post/${slug}`}
+            rel="bookmark"
+            itemProp="url"
+            dangerouslySetInnerHTML={{ __html: postTitle }}
+          ></Link>
         </h2>
       </header>
       <div className="entry-summary" itemProp="description">

@@ -22,13 +22,16 @@ export default function Post({ isLoading, post, loadingStatus }) {
       <header className="entry-header">
         <Author />
         <h1 className="entry-title font-headlines" itemProp="headline">
-          <Link to={`/post/${slug}`} rel="bookmark" itemProp="url">
-            {postTitle}
-          </Link>
+          <Link
+            to={`/post/${slug}`}
+            rel="bookmark"
+            itemProp="url"
+            dangerouslySetInnerHTML={{ __html: postTitle }}
+          ></Link>
         </h1>
       </header>
       <div className="entry-summary" itemProp="description">
-        <p dangerouslySetInnerHTML={{ __html: postContent }}></p>
+        <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
         <Link to={`/post/${slug}`} className="entry-more-link">
           <span>Читать далее</span>
           <span className="screen-reader-text">{postTitle}</span>
