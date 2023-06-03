@@ -26,7 +26,6 @@ export default function PostsContainer() {
     if (!isPostPageLoaded) dispatch(fetchPost({ pageIndex }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isPostPageLoaded, pageIndex]);
-  console.log("postIds", postIds);
 
   return <Posts isLoading={isLoading} postIds={postIds || []} />;
 }

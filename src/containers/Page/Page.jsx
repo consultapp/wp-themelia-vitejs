@@ -20,8 +20,9 @@ export default function PageContainer() {
   const loadingStatus = useSelector(selectPageLoadingStatus);
 
   useEffect(() => {
-    dispatch(fetchPage(slug));
-  }, [dispatch, slug]);
+    if (!page) dispatch(fetchPage(slug));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, page]);
 
   if (loadingStatus === LOADING_STATUS.rejected) return <NotFoundPage />;
 

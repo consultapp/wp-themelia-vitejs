@@ -10,8 +10,6 @@ export default function Post({ isLoading, post, loadingStatus }) {
   const postTitle = title?.rendered || "";
   const postContent = content?.rendered;
 
-  console.log("loadingStatus", loadingStatus);
-
   return (
     <div
       id={id}
