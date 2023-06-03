@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { fetchPost } from "../../store/entities/post/thunk/fetchPost";
 import { useParams } from "react-router-dom";
 import NotFoundPage from "../../components/NotFoundPage/NotFoundPage";
+import { postSlice } from "../../store/entities/post";
 
 export default function PostContainer({ postId, showShort = false }) {
   const dispatch = useDispatch();
@@ -25,8 +26,12 @@ export default function PostContainer({ postId, showShort = false }) {
   const post = postById ? postById : postBySlug;
 
   useEffect(() => {
-    dispatch(fetchPost({ postId, slug }));
-  }, [dispatch, postId, slug]);
+    if (post && isNotFound) dispatch(postSlice.actions.reset404());
+  }, [dispatch, post, isNotFound]);
+
+  useEffect(() => {
+    if (!post) dispatch(fetchPost({ postId, slug }));
+  }, [dispatch, post, postId, slug]);
 
   if (isNotFound) return <NotFoundPage />;
 

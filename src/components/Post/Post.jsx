@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import Author from "../Author/Author";
 
-export default function Post({ isLoading, post, loadingStatus }) {
+export default function Post({ isLoading, post }) {
   if (isLoading) return <Loading />;
   if (!post) return <div>Post Error???</div>;
 

@@ -45,4 +45,9 @@ export const postSlice = createSlice({
       }
     },
   },
+  reducers: {
+    reset404: (state) => {
+      return { ...state, status404: false };
+    },
+  },
 });

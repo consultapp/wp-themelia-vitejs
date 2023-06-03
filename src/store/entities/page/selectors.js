@@ -21,5 +21,10 @@ export const selectPageLoadingStatus = (state) =>
   selectPageModule(state).loadingStatus;
 export const selectIsPageLoading = (state) =>
   selectPageLoadingStatus(state) === LOADING_STATUS.pending;
+
+export const selectIsPageStatus404 = (state) =>
+  selectPageModule(state).status404;
+
 export const selectIsPageNotFound = (state) =>
-  selectPageLoadingStatus(state) === LOADING_STATUS.notfound;
+  selectPageLoadingStatus(state) === LOADING_STATUS.rejected &&
+  selectIsPageStatus404(state);
