@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import Author from "../Author/Author";
 
 export default function Post({ isLoading, post, loadingStatus }) {
   if (isLoading) return <Loading />;
@@ -11,19 +12,20 @@ export default function Post({ isLoading, post, loadingStatus }) {
   const postContent = content?.rendered;
 
   return (
-    <div
+    <article
       id={id}
-      className="entry author-consultapp post-1543 post type-post status-publish format-standard has-post-thumbnail category-stati"
+      className="entry author-consultapp post-1070 post type-post status-publish format-standard has-post-thumbnail category-telegram category-telegram-bots category-stati"
       itemScope="itemScope"
       itemType="http://schema.org/BlogPosting"
       itemProp="blogPost"
     >
       <header className="entry-header">
-        <h2 className="entry-title font-headlines" itemProp="headline">
+        <Author />
+        <h1 className="entry-title font-headlines" itemProp="headline">
           <Link to={`/post/${slug}`} rel="bookmark" itemProp="url">
             {postTitle}
           </Link>
-        </h2>
+        </h1>
       </header>
       <div className="entry-summary" itemProp="description">
         <p dangerouslySetInnerHTML={{ __html: postContent }}></p>
@@ -32,6 +34,6 @@ export default function Post({ isLoading, post, loadingStatus }) {
           <span className="screen-reader-text">{postTitle}</span>
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

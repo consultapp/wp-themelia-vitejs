@@ -14,7 +14,7 @@ export const fetchPage = createAsyncThunk(
     }
 
     const url = new URL("pages", import.meta.env.VITE_API_BASE_URL);
-    const fields = `id,title,categories,excerpt,date,link,type,slug,modified`;
+    const fields = `id,title,content,date,link,slug,modified,author`;
     url.searchParams.set("_fields", fields);
     if (slug) url.searchParams.set("slug", slug);
 
