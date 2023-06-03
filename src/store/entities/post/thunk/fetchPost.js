@@ -41,93 +41,16 @@ export const fetchPost = createAsyncThunk(
     if (slug) url.searchParams.set("slug", slug);
 
     const response = await fetch(url);
-    const json = await response.json();
+    const data = await response.json();
+
+    if (!data || !data.length) {
+      return rejectWithValue(LOADING_STATUS.rejected);
+    }
 
     return pageIndex
-      ? json.map((item) => {
+      ? data.map((item) => {
           return { ...item, pageIndex: Number(pageIndex) };
         })
-      : json;
+      : data;
   }
 );
-
-// https://consultapp.ru/wp-json/wp/v2/pages?_fields=id,title
-
-// author
-// :
-// 1
-// categories
-// :
-// [40, 42, 6]
-// comment_status
-// :
-// "closed"
-// content
-// :
-// {,  }
-// date
-// :
-// "2020-04-12T17:24:26"
-// date_gmt
-// :
-// "2020-04-12T14:24:26"
-// excerpt
-// :
-// {,…}
-// featured_media
-// :
-// 1081
-// format
-// :
-// "standard"
-// guid
-// :
-// {rendered: "https://consultapp.ru/?p=1070"}
-// id
-// :
-// 1070
-// link
-// :
-// "https://consultapp.ru/simple-bot-for-telegram-php/"
-// meta
-// :
-// []
-// modified
-// :
-// "2021-01-09T12:05:45"
-// modified_gmt
-// :
-// "2021-01-09T09:05:45"
-// ping_status
-// :
-// "open"
-// slug
-// :
-// "simple-bot-for-telegram-php"
-// status
-// :
-// "publish"
-// sticky
-// :
-// false
-// tags
-// :
-// []
-// template
-// :
-// ""
-// title
-// :
-// {rendered: "Простейший бот для Телеграма на PHP"}
-// type
-// :
-// "post"
-// yoast_head
-// :
-
-// yoast_head_json
-// :
-// {title: "Простейший бот для Телеграма на PHP",…}
-// _links
-// :
-// {self: [{href: "https://consultapp.ru/wp-json/wp/v2/posts/1070"}],…}

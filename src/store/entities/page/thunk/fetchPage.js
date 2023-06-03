@@ -19,6 +19,11 @@ export const fetchPage = createAsyncThunk(
     if (slug) url.searchParams.set("slug", slug);
 
     const response = await fetch(url);
-    return await response.json();
+    const data = await response.json();
+    if (!data || !data.length) {
+      return rejectWithValue(LOADING_STATUS.rejected);
+    }
+
+    return data;
   }
 );
