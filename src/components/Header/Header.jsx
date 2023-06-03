@@ -84,7 +84,7 @@ export default function Header() {
                   id="menu-item-1106"
                   className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1106"
                 >
-                  <Link to="/past/error/">Page 404</Link>
+                  <Link to="/page/error/">Page 404</Link>
                 </li>
                 {/* <li
                   id="menu-item-1105"
