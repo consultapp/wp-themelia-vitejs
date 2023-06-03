@@ -6,7 +6,10 @@ import Page from "../../components/Page/Page";
 import {
   selectIsPageLoading,
   selectPageBySlug,
+  selectPageLoadingStatus,
 } from "../../store/entities/page/selectors";
+import { LOADING_STATUS } from "../../constants";
+import NotFoundPage from "../../components/NotFoundPage/NotFoundPage";
 
 export default function PageContainer() {
   const { slug } = useParams();
@@ -14,10 +17,13 @@ export default function PageContainer() {
 
   const page = useSelector((state) => selectPageBySlug(state, { slug }));
   const isLoading = useSelector(selectIsPageLoading);
+  const loadingStatus = useSelector(selectPageLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchPage(slug));
   }, [dispatch, slug]);
+
+  if (loadingStatus === LOADING_STATUS.rejected) return <NotFoundPage />;
 
   return <Page page={page} isLoading={isLoading} />;
 }

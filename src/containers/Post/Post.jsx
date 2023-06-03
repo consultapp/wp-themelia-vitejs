@@ -20,7 +20,6 @@ export default function PostContainer({ postId, showShort = false }) {
   const isLoading = useSelector(selectIsPostLoading);
   const loadingStatus = useSelector(selectPostLoadingStatus);
 
-  console.log("slug", slug);
   const postById = useSelector((state) => selectPostById(state, { postId }));
   const postBySlug = useSelector((state) => selectPostBySlug(state, { slug }));
 
