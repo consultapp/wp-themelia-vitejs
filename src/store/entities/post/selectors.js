@@ -22,6 +22,8 @@ export const selectPostLoadingStatus = (state) =>
   selectPostModule(state).loadingStatus;
 export const selectIsPostLoading = (state) =>
   selectPostLoadingStatus(state) === LOADING_STATUS.pending;
+export const selectIsPostRejected = (state) =>
+  selectPostLoadingStatus(state) === LOADING_STATUS.rejected;
 
 export const selectIsPostStatus404 = (state) =>
   selectPostModule(state).status404;

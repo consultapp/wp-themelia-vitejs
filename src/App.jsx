@@ -15,8 +15,8 @@ function App() {
         <Layout>
           <Routes>
             <Route index element={<PostsContainer />} />
-            <Route path="/page/:slug" element={<PageContainer />} />
             <Route path="/posts/:pageIndex" element={<PostsContainer />} />
+            <Route path="/page/:slug" element={<PageContainer />} />
             <Route path="/post/:slug" element={<PostContainer />} />
             <Route path="/404" element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
