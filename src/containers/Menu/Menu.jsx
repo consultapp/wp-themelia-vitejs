@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 export default function MenuContainer() {
   const location = useLocation();
 
-  const isMobileDevice = useMemo(isMobile, [location]);
+  const isMobileDevice = useMemo(isMobile, []);
   const [isOpen, setIsOpen] = useState(!isMobileDevice);
 
   const toggleButton = useCallback((flag) => {
@@ -18,7 +18,7 @@ export default function MenuContainer() {
       setIsOpen(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, [location.pathname]);
 
   return <Menu isOpen={isOpen} toggleButton={toggleButton} />;
 }
