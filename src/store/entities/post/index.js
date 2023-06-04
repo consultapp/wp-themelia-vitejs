@@ -1,6 +1,7 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { LOADING_STATUS } from "../../../constants/index";
 import { fetchPost } from "./thunk/fetchPost";
+import { trimLinkReadNext } from "../../../utils/functions";
 
 const postEntityAdapter = createEntityAdapter();
 
@@ -20,9 +21,7 @@ export const postSlice = createSlice({
     [fetchPost.fulfilled]: (state, { payload }) => {
       state.loadingStatus = LOADING_STATUS.fulfilled;
       state.status404 = false;
-      payload.forEach((item) => {
-        if (item.slug) state.slugToId[item.slug] = item.id;
-      });
+
       if (
         payload?.length &&
         payload[0].pageIndex &&
@@ -31,7 +30,19 @@ export const postSlice = createSlice({
         state.loadedPages.push(Number(payload[0].pageIndex));
       }
 
-      postEntityAdapter.setMany(state, payload);
+      const newPayload = payload.map((item) => {
+        if (item.slug) {
+          state.slugToId[item.slug] = item.id;
+        }
+        return {
+          ...item,
+          content: trimLinkReadNext(item?.content?.rendered || ""),
+          excerpt: trimLinkReadNext(item?.excerpt?.rendered || ""),
+          title: item?.title?.rendered,
+        };
+      });
+
+      postEntityAdapter.setMany(state, newPayload);
     },
     [fetchPost.rejected]: (state, { payload }) => {
       if (payload === LOADING_STATUS.notfound) {
