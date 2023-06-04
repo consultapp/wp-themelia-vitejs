@@ -1,6 +1,6 @@
 import Loading from "../Loading/Loading";
 import PostContainer from "../../containers/Post/Post";
-import PaginationContainer from "../Pagination/Pagination";
+import PaginationContainer from "../../containers/Pagination/Pagination";
 
 export default function Posts({ isLoading, postIds }) {
   if (isLoading) return <Loading />;
