@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import { trimLinkReadNext } from "../../utils/functions";
 
 export default function PostShort({ isLoading, post }) {
+  console.log("PostShort");
+
   if (isLoading) return <Loading />;
   if (!post) return <div>Error???</div>;
 
   const { id, excerpt, slug, title } = post;
 
   const postTitle = title?.rendered || "";
-  const postExcerpt = excerpt.rendered;
+  const postExcerpt = trimLinkReadNext(excerpt.rendered);
 
   return (
     <div
