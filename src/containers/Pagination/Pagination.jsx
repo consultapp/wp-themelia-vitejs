@@ -19,7 +19,5 @@ export default function PaginationContainer() {
     dispatch(fetchPostNav());
   }, [dispatch]);
 
-  console.log("postsCount, pageIndex", postsCount, pageIndex, isLoading);
-
   return <Pagination postsCount={postsCount} pageIndex={Number(pageIndex)} />;
 }

@@ -24,7 +24,6 @@ export default function PostsContainer() {
   const postIds = useSelector((state) => {
     return selectPostsIdsByPageIndex(state, { pageIndex });
   });
-  console.log("postIds", postIds);
 
   useEffect(() => {
     if (!isPostPageLoaded) dispatch(fetchPost({ pageIndex }));
