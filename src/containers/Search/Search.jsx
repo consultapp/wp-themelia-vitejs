@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Search from "../../components/Plugins/Search";
 import { LOADING_STATUS } from "../../constants";
+import { useLocation } from "react-router-dom";
 
 const initialState = { loadingStatus: LOADING_STATUS.idle, data: [] };
 
@@ -21,13 +22,13 @@ async function searchByText(text) {
 export default function SearchContainer() {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState(initialState);
-
+  const { pathname } = useLocation();
   const timer = useRef();
 
   const handleSearchChange = useCallback((event) => {
     event.preventDefault();
     setSearch(event.target.value);
-  });
+  }, []);
 
   useEffect(() => {
     if (search.length < 1) {
@@ -52,6 +53,12 @@ export default function SearchContainer() {
         });
     }, 300);
   }, [search]);
+
+  useEffect(() => {
+    console.log("SEARCH result", pathname);
+    setResult(initialState);
+    setSearch("");
+  }, [pathname]);
 
   return (
     <Search
