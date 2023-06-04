@@ -4,3 +4,13 @@ export function trimLinkReadNext(str) {
 
   return result;
 }
+
+const words = ["mobile", "iphone", "android"];
+export function isMobile() {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+
+  return words.reduce(
+    (acc, word) => (userAgent.includes(word) ? true : acc),
+    false
+  );
+}
