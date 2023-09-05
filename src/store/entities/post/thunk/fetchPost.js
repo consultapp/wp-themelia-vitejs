@@ -42,6 +42,7 @@ export const fetchPost = createAsyncThunk(
 
     const response = await fetch(url);
     const data = await response.json();
+    console.log("data", url, data);
 
     if (!data || !data.length) {
       return rejectWithValue(LOADING_STATUS.notfound);
