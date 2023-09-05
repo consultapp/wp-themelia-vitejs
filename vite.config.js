@@ -19,10 +19,10 @@ export default defineConfig({
         "safari-pinned-tab.svg",
       ],
       manifest: {
-        name: "Themelia for React/WordPress",
-        short_name: "Themelia React/WP",
+        name: "PWA Application | Themelia for React.js/WordPress",
+        short_name: "PWA Themelia React/WP",
         theme_color: "#ffffff",
-        background_color: "#ffffff",
+        background_color: "#000000",
         display: "standalone",
         orientation: "portrait",
         scope: "/",

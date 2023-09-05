@@ -1,9 +1,9 @@
 {
   "name": "wp-themelia-vitejs",
-  "description": "Адаптация темы Wordpress Themelia для работы с Wordpress в режиме Headless CMS. Без SSR.",
+  "description": "Адаптация темы Wordpress Themelia для работы с Wordpress в режиме Headless CMS. Без SSR. PWA",
   "homepage": "https://github.com/consultapp/wp-themelia-vitejs",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
